@@ -4,7 +4,10 @@ import s from "./contacts.module.css";
 import { connect } from "react-redux";
 
 const ContactList = ({ contacts, filter }) => {
-  const getFilteredContacts = (filter) => {
+  //this is it//
+
+  const getFilteredContacts = () => {
+    console.log(contacts, filter);
     const normalizedFilter = filter.toLowerCase();
     return contacts.filter(
       (contact) =>
@@ -12,23 +15,23 @@ const ContactList = ({ contacts, filter }) => {
         contact.number.includes(normalizedFilter)
     );
   };
-  const filteredContacts = filter && getFilteredContacts(filter);
 
+  const filteredContacts = getFilteredContacts();
+
+  // return "muha";
   return (
     <ul className={s.list}>
       {filteredContacts &&
-        filteredContacts.map((contact) => {
-          console.log(contact);
-
-          return <ContactListItem key={contact.id} {...contact} />;
-        })}
+        filteredContacts.map((contact) => (
+          <ContactListItem key={contact.id} {...contact} />
+        ))}
     </ul>
   );
 };
 
 const mapStateToProps = (state) => ({
   contacts: state.contacts.items,
-  filter: state.filter,
+  filter: state.contacts.filter,
 });
 
 export default connect(mapStateToProps, null)(ContactList);

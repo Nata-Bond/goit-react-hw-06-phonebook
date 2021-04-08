@@ -5,7 +5,6 @@ import { changeFilter } from "../../redux/contacts/contactsActions";
 
 const Filter = ({ changeFilter, filter }) => {
   const handleChangeFilter = (e) => {
-    // e.preventDefault();
     changeFilter(e.target.value);
   };
 
